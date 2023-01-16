@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+
+<body>
+    <%- include('../layout/header'); %>
+        <div class="container mt-3">
+            <h1>Employee List</h1>
+            <% if(message){%>
+                <div class="alert alert-success alert-dismissible fade show">
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    <strong>
+                        <%= message.message %>
+                    </strong>
+                </div>
+                <%}%>
+                    <% if(listEmployee !="" ){%>
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>FullName</th>
+                                    <th>Age</th>
+                                    <th>Address</th>
+                                    <th>Image</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% listEmployee.forEach((item,index)=>{ %>
+                                    <tr>
+                                        <td>
+                                            <%= item.fullName%>
+                                        </td>
+                                        <td>
+                                            <%= item.age%>
+                                        </td>
+                                        <td>
+                                            <%= item.address%>
+                                        </td>
+                                        <td>
+                                            <img src="<%= item.image%>" width="100" class="img-thumbnail" />
+                                        </td>
+                                        <td class="text-center">
+                                            <a class="btn btn-primary" href="/employee/detail/<%=item.id%>">Detail</a>
+                                            <a class="btn btn-warning" href="/employee/update/<%=item.id%>">Update</a>
+                                            <a class="btn btn-danger" href="/employee/delete/<%=item.id%>">Delete</a>
+                                        </td>
+                                    </tr>
+                                    <% }) %>
+
+                            </tbody>
+                        </table>
+
+                        <%}%>
+        </div>
+        <%- include('../layout/footer'); %>
+</body>
+
+</html>
